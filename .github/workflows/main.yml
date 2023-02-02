@@ -1,7 +1,29 @@
 on: [push]
 
 jobs:
-  hello_world_job:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Download Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.18
+      id: go
+
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v3
+
+    - name: Get dependencies
+      run: |
+                go get -v -t -d ./...
+    - name: Build
+      env:
+        GOPROXY: "https://proxy.golang.org"
+      run: go build .
+
+  test_github_action:
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
@@ -13,8 +35,9 @@ jobs:
         uses: ./ # Uses an action in the root directory
         id: hello
         with:
-          argument-number-one: 'Mona the Octocat'
-          argument-number-two: 'Actions rule'
+          argument-number-one: 'Sammi Tests'
+          argument-number-two: '666'
+          argument-number-three: 'myns'
       # Use the output from the `hello` step
       - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.time }}"

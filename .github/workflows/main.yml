@@ -25,7 +25,7 @@ jobs:
 
   test_github_action:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: Test running golang app as action
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -38,19 +38,11 @@ jobs:
       - name: Build
         run: go build -v ./...
 
-      - name: List out dir
-        run: ls -l
-
-      # - name: Download gha-test-golang
-      #   uses: actions/download-artifact@v3
-      #   with:
-      #     name: gha-test-golang
-
       - name: Github Action Step
         uses: ./ 
         id: gha
         with:
-          argument-number-one: 'Sammi Tests'
+          argument-number-one: 'my-app-test'
           argument-number-two: '666'
           argument-number-three: 'myns'
       # Use the output from the `hello` step

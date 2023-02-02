@@ -13,7 +13,7 @@ func main() {
 
 	flag.StringVar(&name, "name", "", "The name of the application")
 	flag.StringVar(&timeout, "timeout", "", "The timeout in seconds to wait for the result")
-	flag.StringVar(&namespace, "namespace", "", "The namespace of the application")
+	flag.StringVar(&namespace, "namespace", "default", "The namespace of the application")
 
 	flag.Parse()
 
@@ -24,11 +24,6 @@ func main() {
 
 	if timeout == "" {
 		fmt.Println("Error: timeout flag must be set.")
-		os.Exit(1)
-	}
-
-	if namespace == "" {
-		fmt.Println("Error: namespace flag must be set.")
 		os.Exit(1)
 	}
 

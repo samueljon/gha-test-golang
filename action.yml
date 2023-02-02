@@ -1,6 +1,6 @@
 # action.yml
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Run Golang App'
+description: 'Run Golang app with github action'
 inputs:
   argument-number-one:  # id of input
     description: 'Argument one'
@@ -12,11 +12,11 @@ inputs:
     default: 'two'
   argument-number-three:  # id of input
     description: 'Argument three'
-    required: true
+    required: false
     default: 'three'
 outputs:
   time: # id of output
-    description: 'The time we greeted you'
+    description: 'Time result output'
 runs:
   using: 'docker'
   image: 'Dockerfile'

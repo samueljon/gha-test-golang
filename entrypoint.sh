@@ -1,5 +1,5 @@
 #!/bin/sh -l
 
-echo "Hello $1"
+echo "Argument one: $1 Argument two: $2"
 time=$(date)
 echo "time=$time" >> $GITHUB_OUTPUT

@@ -16,24 +16,35 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Get dependencies
-      run: |
-                go get -v -t -d ./...
+      run: go get -v -t -d ./...
+
     - name: Build
-      env:
-        GOPROXY: "https://proxy.golang.org"
-      run: go build .
+      run: go build -v ./...
+
+    - name: List out dir
+      run: ls -l
+
+    - name: Upload math result for job 1
+      uses: actions/upload-artifact@v3
+      with:
+        name: gha-test-golang
+        path: gha-test-golang
 
   test_github_action:
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
-      # To use this repository's private action,
-      # you must check out the repository
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Hello world action step
-        uses: ./ # Uses an action in the root directory
-        id: hello
+
+      - name: Download gha-test-golang
+        uses: actions/download-artifact@v3
+        with:
+          name: gha-test-golang
+
+      - name: Github Action Step
+        uses: ./ 
+        id: gha
         with:
           argument-number-one: 'Sammi Tests'
           argument-number-two: '666'
